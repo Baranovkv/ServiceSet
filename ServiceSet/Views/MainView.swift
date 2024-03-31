@@ -15,7 +15,6 @@ struct MainView: View {
 		NavigationStack {
 			VStack {
 				switch serviceSet.loadingState {
-					
 				case .loading:
 					ProgressView()
 				case .loaded:
@@ -27,10 +26,15 @@ struct MainView: View {
 			}
 			.navigationTitle("Сервисы")
 			.navigationBarTitleDisplayMode(.inline)
+			.refreshable {
+				print("refresh")
+				serviceSet.loadServices()
+			}
 		}
 		.onAppear {
 			serviceSet.loadServices()
 		}
+		
 	}
 }
 
